@@ -1,0 +1,177 @@
+/* ==========================================================
+   SEÇÕES: hero, missão (stats) e viagem pelos planetas
+   ========================================================== */
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 100vh;
+  display: grid; place-items: center; text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+}
+.eyebrow {
+  color: var(--muted); font-size: 12px;
+  letter-spacing: .4em; text-transform: uppercase;
+  margin-bottom: 26px;
+}
+.hero h1 {
+  font-family: "Unbounded", sans-serif; font-weight: 800;
+  font-size: clamp(48px, 13vw, 190px);
+  line-height: .95; letter-spacing: -.02em;
+  background: linear-gradient(180deg, #fff 30%, var(--accent) 120%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.hero h1 .ch { display: inline-block; } /* cada letra (criada pelo hero.js) */
+.hero p.sub {
+  max-width: 520px; margin: 28px auto 0;
+  color: var(--muted); line-height: 1.6;
+  font-size: clamp(15px, 2vw, 19px);
+}
+
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: var(--muted); font-size: 11px;
+  letter-spacing: .3em; text-transform: uppercase;
+}
+.scroll-hint i {
+  width: 1px; height: 50px;
+  background: linear-gradient(var(--fg), transparent);
+  transform-origin: top;
+  animation: drip 2s ease-in-out infinite;
+}
+@keyframes drip {
+  0%   { transform: scaleY(0); }
+  50%  { transform: scaleY(1); }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ---------- MISSÃO + ESTATÍSTICAS ---------- */
+.intro { padding: 18vh clamp(20px, 8vw, 120px); max-width: 1200px; margin: 0 auto; }
+.intro h2 {
+  font-family: "Unbounded", sans-serif; font-weight: 500;
+  font-size: clamp(24px, 4.2vw, 56px); line-height: 1.25;
+}
+.intro h2 span { color: var(--muted); }
+
+.stats {
+  display: grid; gap: 24px; margin-top: 12vh;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.stat { border-top: 1px solid var(--line); padding-top: 18px; }
+.stat b {
+  display: block; font-weight: 500;
+  font-family: "Unbounded", sans-serif;
+  font-size: clamp(32px, 5vw, 60px);
+}
+.stat small { color: var(--muted); font-size: 14px; }
+
+/* ---------- VIAGEM (cena fixada na tela) ---------- */
+#viagem { height: 100vh; position: relative; overflow: hidden; }
+
+.stage {
+  height: 100%;
+  display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 20px;
+  padding: 0 clamp(20px, 6vw, 100px);
+}
+.planet-zone { display: grid; place-items: center; position: relative; height: 70vh; }
+.planet-wrap {
+  --size: min(46vh, 42vw); /* tamanho base: vale para o planeta e para o anel */
+  position: relative; display: grid; place-items: center; will-change: transform;
+}
+
+/* brilho atrás do planeta */
+.glow {
+  position: absolute; width: 150%; height: 150%; border-radius: 50%;
+  background: radial-gradient(circle, var(--c2) 0%, transparent 62%);
+  opacity: .28; filter: blur(30px);
+}
+
+/* o planeta em si (cores vêm de --c1 / --c2, escala de --s) */
+.planet {
+  width:  calc(var(--size) * var(--s, 1));
+  height: calc(var(--size) * var(--s, 1));
+  border-radius: 50%; position: relative; overflow: hidden;
+  background: radial-gradient(circle at 32% 30%, var(--c1), var(--c2) 62%, #000 135%);
+  box-shadow:
+    inset -28px -22px 60px rgba(0, 0, 0, .65),
+    0 0 80px color-mix(in srgb, var(--c2) 40%, transparent);
+}
+/* faixas que "giram" na superfície */
+.planet::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: repeating-linear-gradient(100deg,
+    rgba(255,255,255,0) 0 18px, rgba(255,255,255,.10) 18px 30px, rgba(0,0,0,.10) 30px 46px);
+  background-size: 200% 100%;
+  mix-blend-mode: overlay;
+  animation: drift 24s linear infinite;
+}
+@keyframes drift { to { background-position: -200% 0; } }
+/* sombra no lado oposto à luz */
+.planet::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 70% 75%, rgba(0, 0, 0, .55), transparent 55%);
+}
+
+/* anel de Saturno */
+.ring {
+  position: absolute; pointer-events: none; opacity: 0; transition: opacity .4s;
+  width:  calc(var(--size) * var(--s, 1) * 1.85);
+  height: calc(var(--size) * var(--s, 1) * 1.85);
+  border-radius: 50%; border: 16px solid rgba(235, 215, 170, .45);
+  box-shadow: 0 0 0 10px rgba(235, 215, 170, .18), inset 0 0 0 10px rgba(235, 215, 170, .18);
+  transform: rotateX(76deg) rotateZ(-14deg);
+}
+.ring.on { opacity: 1; }
+
+/* painel de informações */
+.info { max-width: 520px; }
+.idx {
+  font-family: "Unbounded", sans-serif; color: var(--muted);
+  font-size: 13px; letter-spacing: .3em; margin-bottom: 14px;
+}
+.info h3 {
+  font-family: "Unbounded", sans-serif; font-weight: 800;
+  font-size: clamp(38px, 6.5vw, 96px); line-height: 1; margin-bottom: 22px;
+}
+.info .fact {
+  color: var(--muted); line-height: 1.6; min-height: 4.8em;
+  font-size: clamp(15px, 1.5vw, 19px);
+}
+.data { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 30px; }
+.data div {
+  background: var(--glass); border: 1px solid var(--line);
+  border-radius: 14px; padding: 14px; backdrop-filter: blur(8px);
+}
+.data small {
+  display: block; margin-bottom: 6px; color: var(--muted);
+  font-size: 11px; text-transform: uppercase; letter-spacing: .12em;
+}
+.data b { font-size: clamp(15px, 1.6vw, 20px); font-weight: 500; }
+
+/* bolinhas de navegação entre planetas */
+.dots {
+  position: absolute; z-index: 5;
+  right: clamp(14px, 2.5vw, 36px); top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.dots button {
+  width: 10px; height: 10px; padding: 0;
+  border-radius: 50%; border: 1px solid var(--fg); background: transparent;
+  opacity: .45; transition: all .3s;
+}
+.dots button.on { background: var(--fg); opacity: 1; transform: scale(1.5); }
+.dots button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* barra de distância (Sol → Netuno) */
+.distbar {
+  position: absolute; bottom: 34px; height: 1px; background: var(--line);
+  left: clamp(20px, 6vw, 100px); right: clamp(20px, 6vw, 100px);
+}
+.distbar i {
+  position: absolute; left: 0; top: -3px; width: 100%; height: 7px;
+  background: var(--fg); transform: scaleX(0); transform-origin: left;
+}
+.distbar span { position: absolute; top: 14px; font-size: 11px; color: var(--muted); letter-spacing: .15em; }
+.distbar span:last-child { right: 0; }

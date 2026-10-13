@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÓRBITA · Uma viagem pelo Sistema Solar</title>
+  <meta name="description" content="Role a página e viaje do Sol até Netuno. Depois, tente sobreviver a um campo de asteroides.">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+
+  <!-- CSS (a ordem importa: responsive.css fica por último) -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/ui.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ================= EXTRAS DE FUNDO / UI ================= -->
+  <div id="loader" aria-live="polite">
+    <div>
+      <div class="loader-orbit"></div>
+      <div id="loader-pct">0%</div>
+    </div>
+  </div>
+
+  <div class="cursor"></div>
+  <div class="cursor-dot"></div>
+  <div id="progress"></div>
+
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="nebula" aria-hidden="true"></div>
+
+  <!-- ================= MENU ================= -->
+  <header>
+    <a href="#topo" class="logo">ÓRBITA</a>
+    <nav>
+      <a href="#missao">Missão</a>
+      <a href="#viagem">Viagem</a>
+      <a href="#jogo">Jogo</a>
+    </nav>
+  </header>
+
+  <main id="topo">
+
+    <!-- ================= 1. HERO ================= -->
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Uma viagem de 4,5 bilhões de km</p>
+        <h1 id="titulo" aria-label="ÓRBITA">ÓRBITA</h1>
+        <p class="sub">Role a página para sair do Sol, cruzar oito planetas e chegar à borda do Sistema Solar.</p>
+      </div>
+      <div class="scroll-hint"><span>role</span><i></i></div>
+    </section>
+
+    <!-- ================= 2. MISSÃO + NÚMEROS ================= -->
+    <section class="intro" id="missao">
+      <h2 class="reveal">O Sistema Solar tem cerca de <span>4,6 bilhões de anos</span> e a luz do Sol leva <span>8 minutos</span> para chegar até nós. Vamos percorrer tudo isso em alguns segundos de scroll.</h2>
+      <div class="stats">
+        <div class="stat reveal"><b data-count="8">0</b><small>planetas</small></div>
+        <div class="stat reveal"><b data-count="4495">0</b><small>milhões de km até Netuno</small></div>
+        <div class="stat reveal"><b data-count="99.8" data-dec="1">0</b><small>% da massa está no Sol</small></div>
+      </div>
+    </section>
+
+    <!-- ================= 3. VIAGEM PELOS PLANETAS ================= -->
+    <!-- Os dados vêm de js/config.js e são preenchidos por js/journey.js -->
+    <section id="viagem" aria-label="Viagem pelos planetas">
+      <div class="stage">
+        <div class="planet-zone">
+          <div class="planet-wrap" id="planetWrap">
+            <div class="glow"></div>
+            <div class="planet" id="planet"></div>
+            <div class="ring" id="ring"></div>
+          </div>
+        </div>
+
+        <div class="info" id="info">
+          <div class="idx" id="idx">01 / 09</div>
+          <h3 id="nome">Sol</h3>
+          <p class="fact" id="fato"></p>
+          <div class="data">
+            <div><small>Distância do Sol</small><b id="dDist">0</b></div>
+            <div><small>Temperatura</small><b id="dTemp">0</b></div>
+            <div><small>Luas</small><b id="dLuas">0</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dots" id="dots" role="tablist" aria-label="Escolher planeta"></div>
+
+      <div class="distbar" aria-hidden="true">
+        <i id="distFill"></i>
+        <span>SOL</span><span>NETUNO</span>
+      </div>
+    </section>
+
+    <!-- ================= 4. JOGO ================= -->
+    <section class="game-sec" id="jogo">
+      <h2 class="reveal">Campo de asteroides</h2>
+      <p class="lead reveal">Mova a nave com o mouse, o dedo ou as setas ← →. Desvie das rochas e colete os cristais. Você tem 3 vidas.</p>
+
+      <div class="game-box reveal">
+        <button class="mute" id="mute" aria-pressed="false">Som: ligado</button>
+        <canvas id="game" width="900" height="520" aria-label="Jogo de desviar de asteroides"></canvas>
+        <div class="overlay" id="overlay">
+          <h3 id="ovTitle">Pronto para decolar?</h3>
+          <p id="ovText">Cristais valem 50 pontos. A cada segundo a chuva de asteroides fica mais intensa.</p>
+          <button class="btn" id="play">Jogar</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <b>Boa viagem.</b>
+    Feito com HTML, CSS, JavaScript, GSAP e Lenis · Projeto de Front-End Design
+  </footer>
+
+  <!-- ================= BIBLIOTECAS (CDN) ================= -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+  <!-- ================= NOSSOS SCRIPTS (a ordem importa) ================= -->
+  <script src="js/config.js"></script>   <!-- dados e ajustes -->
+  <script src="js/utils.js"></script>    <!-- funções e estado compartilhado -->
+  <script src="js/stars.js"></script>    <!-- estrelas do fundo -->
+  <script src="js/loader.js"></script>   <!-- tela de carregamento -->
+  <script src="js/cursor.js"></script>   <!-- cursor personalizado -->
+  <script src="js/hero.js"></script>     <!-- título animado -->
+  <script src="js/scroll.js"></script>   <!-- Lenis + progresso + menu -->
+  <script src="js/reveal.js"></script>   <!-- aparecer ao rolar + contadores -->
+  <script src="js/journey.js"></script>  <!-- viagem pelos planetas -->
+  <script src="js/audio.js"></script>    <!-- sons -->
+  <script src="js/game.js"></script>     <!-- jogo -->
+  <script src="js/main.js"></script>     <!-- liga tudo (sempre por último) -->
+</body>
+</html>

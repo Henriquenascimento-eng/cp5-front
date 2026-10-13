@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mochila Viagens</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-areia: #fdf6e3;
+      --color-mar: #0e7490;
+      --color-sol: #f59e0b;
+    }
+  </style>
+</head>
+<body class="bg-areia text-gray-800 font-sans">
+
+  <header class="flex justify-between items-center px-6 py-4 bg-mar text-white">
+    <h1 class="text-xl font-bold">Mochila Viagens</h1>
+    <nav class="flex gap-4">
+      <a href="#como" class="hover:underline">Como funciona</a>
+      <a href="#destinos" class="hover:underline">Destinos</a>
+      <a href="#contato" class="hover:underline">Contato</a>
+    </nav>
+  </header>
+
+  <section class="text-center py-20 px-6">
+    <h2 class="text-3xl md:text-5xl font-bold mb-4">Sua próxima aventura começa aqui</h2>
+    <p class="mb-6">Pacotes de viagem simples, baratos e sem dor de cabeça.</p>
+    <a href="#destinos" class="bg-sol text-white px-6 py-3 rounded hover:bg-amber-600">Ver destinos</a>
+  </section>
+
+  <section id="como" class="py-16 px-6 bg-white">
+    <h2 class="text-2xl font-bold text-center mb-8">Como funciona em 4 passos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+      <div class="p-4 border rounded text-center"><strong>1.</strong> Escolha o destino</div>
+      <div class="p-4 border rounded text-center"><strong>2.</strong> Escolha a data</div>
+      <div class="p-4 border rounded text-center"><strong>3.</strong> Faça o pagamento</div>
+      <div class="p-4 border rounded text-center"><strong>4.</strong> Boa viagem!</div>
+    </div>
+  </section>
+
+  <section id="destinos" class="py-16 px-6">
+    <h2 class="text-2xl font-bold text-center mb-8">Destinos em destaque</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg">
+        <h3 class="font-bold">Florianópolis</h3>
+        <p class="text-sm">5 dias · a partir de R$ 1.200</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg">
+        <h3 class="font-bold">Gramado</h3>
+        <p class="text-sm">4 dias · a partir de R$ 1.500</p>
+      </div>
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg">
+        <h3 class="font-bold">Salvador</h3>
+        <p class="text-sm">6 dias · a partir de R$ 1.800</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contato" class="bg-gray-900 text-white text-center py-8">
+    <p>contato@mochilaviagens.com</p>
+    <p class="text-sm mt-2">© 2026 Mochila Viagens</p>
+  </footer>
+
+</body>
+</html>

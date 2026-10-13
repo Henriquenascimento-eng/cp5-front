@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitZone Academia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar fixa e responsiva -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-fit fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">FitZone</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#planos">Planos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">Dúvidas</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero text-center text-white d-flex align-items-center">
+    <div class="container">
+      <h1>Treine do seu jeito</h1>
+      <p class="lead">Aulas, musculação e acompanhamento profissional.</p>
+      <button class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#modalMatricula">Matricule-se</button>
+    </div>
+  </header>
+
+  <!-- Planos em cards (grid do Bootstrap) -->
+  <section id="planos" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Planos</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <h5 class="card-title">Básico</h5>
+              <p class="display-6">R$ 79</p>
+              <p>Musculação</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center h-100 border-warning">
+            <div class="card-body">
+              <h5 class="card-title">Plus</h5>
+              <p class="display-6">R$ 119</p>
+              <p>Musculação + aulas</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <h5 class="card-title">Premium</h5>
+              <p class="display-6">R$ 169</p>
+              <p>Tudo + personal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrossel -->
+  <section id="depoimentos" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="mb-4">Depoimentos</h2>
+      <div id="carrossel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <p class="fs-4">"Perdi 8 kg em 3 meses!"</p>
+            <strong>Lucas</strong>
+          </div>
+          <div class="carousel-item">
+            <p class="fs-4">"Professores muito atenciosos."</p>
+            <strong>Marina</strong>
+          </div>
+          <div class="carousel-item">
+            <p class="fs-4">"Ambiente limpo e motivador."</p>
+            <strong>Diego</strong>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrossel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrossel" data-bs-slide="next">
+          <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accordion -->
+  <section id="faq" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Dúvidas frequentes</h2>
+      <div class="accordion" id="accordionFaq">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#p1">Preciso de exame médico?</button>
+          </h2>
+          <div id="p1" class="accordion-collapse collapse show" data-bs-parent="#accordionFaq">
+            <div class="accordion-body">Recomendamos um atestado médico antes de começar.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#p2">Posso trancar o plano?</button>
+          </h2>
+          <div id="p2" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
+            <div class="accordion-body">Sim, por até 30 dias a cada ano.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalMatricula" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Faça sua matrícula</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <input type="text" class="form-control mb-3" placeholder="Seu nome">
+            <input type="email" class="form-control mb-3" placeholder="Seu e-mail">
+            <select class="form-select mb-3">
+              <option>Plano Básico</option>
+              <option>Plano Plus</option>
+              <option>Plano Premium</option>
+            </select>
+            <button type="submit" class="btn btn-warning w-100">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-fit text-white text-center py-3">
+    © 2026 FitZone Academia
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

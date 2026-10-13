@@ -1,0 +1,29 @@
+/* ==========================================================
+   RESPONSIVO + ACESSIBILIDADE
+   (fica por último para sobrescrever os outros arquivos)
+   ========================================================== */
+
+@media (max-width: 800px) {
+  .stage {
+    grid-template-columns: 1fr; grid-template-rows: 42vh auto;
+    align-content: center; text-align: center;
+  }
+  .planet-zone { height: 42vh; }
+  .planet-wrap { --size: min(30vh, 62vw); }
+  .info { margin: 0 auto; }
+  .data b { font-size: 14px; }
+
+  /* bolinhas viram uma linha horizontal embaixo */
+  .dots {
+    flex-direction: row; right: auto; top: auto;
+    left: 50%; bottom: 64px; transform: translateX(-50%);
+  }
+
+  /* no celular o menu mostra só 2 links */
+  nav a:nth-child(n+3) { display: none; }
+}
+
+/* Quem prefere menos movimento: desliga animações contínuas */
+@media (prefers-reduced-motion: reduce) {
+  .planet::before, .scroll-hint i, .loader-orbit { animation: none; }
+}

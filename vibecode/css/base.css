@@ -1,0 +1,58 @@
+/* ==========================================================
+   BASE: variáveis, reset e elementos globais
+   Para mudar as cores do site, altere as variáveis abaixo.
+   (--c1 e --c2 mudam sozinhas conforme o planeta, via JS)
+   ========================================================== */
+
+:root {
+  --bg: #05060f;
+  --fg: #eef1ff;
+  --muted: #8d93b8;
+  --accent: #7c8cff;
+  --accent2: #ff7ad9;
+  --glass: rgba(255, 255, 255, 0.06);
+  --line: rgba(255, 255, 255, 0.12);
+
+  /* cores do planeta atual (controladas pelo journey.js) */
+  --c1: #fff3b0;
+  --c2: #ff9d00;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none; /* o cursor é personalizado (veja ui.css) */
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: none; }
+
+/* Em telas de toque volta o cursor normal */
+@media (pointer: coarse) {
+  body, button { cursor: auto; }
+  button { cursor: pointer; }
+}
+
+/* ---------- Fundo (estrelas + nebulosa) ---------- */
+#stars {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.nebula {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 15% 20%, rgba(124, 140, 255, 0.14), transparent 70%),
+    radial-gradient(50% 40% at 85% 75%, rgba(255, 122, 217, 0.10), transparent 70%);
+}
+
+/* Conteúdo fica acima do fundo */
+main, header, footer { position: relative; z-index: 1; }
